@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .welcome-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .icon-blue {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        color: white;
+    }
+
+    .icon-orange {
+        background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+        color: white;
+    }
+
+    .icon-purple {
+        background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+        color: white;
+    }
+
+    .welcome-title {
+        color: white;
+        text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-primary-custom {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        border: none;
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-primary-custom:hover {
+        background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    .btn-outline-custom {
+        border: 2px solid #6366f1;
+        color: #6366f1;
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        background: white;
+    }
+
+    .btn-outline-custom:hover {
+        background: #6366f1;
+        color: white;
+        transform: translateY(-2px);
+    }
+</style>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-10">
+        
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-light mb-3 welcome-title">Bem-vindo ao Skynetz FaleMais</h1>
+            <p class="lead text-white-50">Gerencie suas tarifas e calcule economia de forma simples e rápida</p>
+        </div>
+
+        <div class="welcome-card shadow-lg p-5 mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="mb-3">Como Funciona</h2>
+                    <p class="text-muted mb-3">
+                        O sistema Skynetz FaleMais permite que você:
+                    </p>
+                    <ul class="text-muted">
+                        <li class="mb-2"><strong>Cadastre tarifas</strong> entre diferentes DDDs</li>
+                        <li class="mb-2"><strong>Compare custos</strong> com e sem planos FaleMais</li>
+                        <li class="mb-2"><strong>Visualize economia</strong> em tempo real</li>
+                        <li class="mb-2"><strong>Gerencie planos</strong> de 30, 60 ou 120 minutos</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div style="font-size: 6rem; color: #6366f1;">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="text-white mb-4 text-center">Acesso Rápido</h3>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="feature-card shadow p-4 text-center">
+                    <div class="feature-icon icon-blue mx-auto">
+                        <i class="bi bi-calculator-fill"></i>
+                    </div>
+                    <h5 class="mb-3">Calculadora</h5>
+                    <p class="text-muted small mb-4">
+                        Simule e compare custos de ligações com nossos planos FaleMais
+                    </p>
+                    <a asp-controller="Calculator" asp-action="Index" class="btn-primary-custom">
+                        Acessar <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card shadow p-4 text-center">
+                    <div class="feature-icon icon-orange mx-auto">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <h5 class="mb-3">Tarifas</h5>
+                    <p class="text-muted small mb-4">
+                        Gerencie as tarifas por minuto entre diferentes DDDs
+                    </p>
+                    <a asp-controller="Rates" asp-action="Index" class="btn-primary-custom">
+                        Gerenciar <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card shadow p-4 text-center">
+                    <div class="feature-icon icon-purple mx-auto">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <h5 class="mb-3">Relatórios</h5>
+                    <p class="text-muted small mb-4">
+                        Em breve: visualize estatísticas e relatórios detalhados
+                    </p>
+                    <button class="btn-outline-custom" disabled>
+                        Em Breve
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="welcome-card shadow-lg p-4 text-center">
+            <h5 class="mb-3">Precisa de Ajuda?</h5>
+            <p class="text-muted mb-0">
+                <i class="bi bi-info-circle-fill text-primary"></i> 
+                Navegue pelo menu acima para acessar todas as funcionalidades do sistema
+            </p>
+        </div>
+
+    </div>
+</div>

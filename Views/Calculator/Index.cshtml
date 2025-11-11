@@ -1,0 +1,251 @@
+﻿@model Project_Skynetz.Models.CalculatorViewModel
+
+@{
+    ViewData["Title"] = "Calculadora FaleMais";
+}
+
+<style>
+    .card-custom {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .main-title {
+        color: white;
+        text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .title-underline {
+        width: 120px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #6366f1, transparent);
+        margin: 0 auto;
+    }
+
+    .btn-primary-custom {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        border: none;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary-custom:hover {
+        background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        transform: translateY(-2px);
+    }
+
+    .form-control-custom, .form-select-custom {
+        border: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+    }
+
+    .form-control-custom:focus, .form-select-custom:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .result-box-green {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+        border: 2px solid #10b981;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .result-box-green:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .result-box-red {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+        border: 2px solid #ef4444;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .result-box-red:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(239, 68, 68, 0.2);
+    }
+
+    .result-box-orange {
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 140, 66, 0.15) 100%);
+        border: 2px solid #ff6b35;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .result-box-orange:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2);
+    }
+
+    .result-box-gray {
+        background: linear-gradient(135deg, rgba(156, 163, 175, 0.1) 0%, rgba(107, 114, 128, 0.1) 100%);
+        border: 2px solid #9ca3af;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .result-box-gray:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(156, 163, 175, 0.2);
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            
+            <div class="text-center mb-5">
+                <h1 class="fw-light mb-3 main-title" style="letter-spacing: 1px;">Calculadora FaleMais</h1>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="card border-0 shadow-lg mb-4 card-custom">
+                <div class="card-body p-5">
+                    <form asp-action="Calculate" method="post" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-light border text-danger mb-4"></div>
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="OriginCode" class="form-label text-uppercase small fw-semibold text-muted mb-2" style="letter-spacing: 0.5px;">Origem</label>
+                                <select asp-for="OriginCode" class="form-select form-select-lg rounded-3 form-select-custom">
+                                    <option value="">Selecione o DDD</option>
+                                    @foreach (var code in ViewBag.AreaCodes)
+                                    {
+                                        <option value="@code">@code</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="OriginCode" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label asp-for="DestinationCode" class="form-label text-uppercase small fw-semibold text-muted mb-2" style="letter-spacing: 0.5px;">Destino</label>
+                                <select asp-for="DestinationCode" class="form-select form-select-lg rounded-3 form-select-custom">
+                                    <option value="">Selecione o DDD</option>
+                                    @foreach (var code in ViewBag.AreaCodes)
+                                    {
+                                        <option value="@code">@code</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="DestinationCode" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6">
+                                <label asp-for="TotalMinutes" class="form-label text-uppercase small fw-semibold text-muted mb-2" style="letter-spacing: 0.5px;">Tempo (minutos)</label>
+                                <input asp-for="TotalMinutes" type="number" class="form-control form-control-lg rounded-3 form-control-custom" placeholder="Ex: 80" oninput="if(this.value.length > 3) this.value = this.value.slice(0,3); this.value = this.value.replace(/^0+/, ''); if(this.value < 1 && this.value != '') this.value = 1;" />
+                                <small class="text-muted">Entre 1 e 999 minutos</small>
+                                <span asp-validation-for="TotalMinutes" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label asp-for="PlanId" class="form-label text-uppercase small fw-semibold text-muted mb-2" style="letter-spacing: 0.5px;">Plano</label>
+                                <select asp-for="PlanId" class="form-select form-select-lg rounded-3 form-select-custom">
+                                    <option value="">Selecione o plano</option>
+                                    @foreach (var plan in ViewBag.Plans)
+                                    {
+                                        <option value="@plan.Id">@plan.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="PlanId" class="text-danger small mt-1 d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-lg px-5 py-3 rounded-3 text-uppercase fw-semibold btn-primary-custom text-white" style="letter-spacing: 1px;">
+                                Calcular
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            @if (Model.PriceWithPlan.HasValue && Model.PriceWithoutPlan.HasValue)
+            {
+                var savings = Model.PriceWithoutPlan.Value - Model.PriceWithPlan.Value;
+                var savingsPercentage = Model.PriceWithoutPlan.Value > 0 
+                    ? (savings / Model.PriceWithoutPlan.Value) * 100 
+                    : 0;
+                var hasEconomy = savings > 0;
+                
+                <div class="card border-0 shadow-lg mt-4 card-custom">
+                    <div class="card-header py-4 text-center" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); border: none;">
+                        <h4 class="mb-0 text-white fw-light" style="letter-spacing: 0.5px;">
+                            <i class="bi bi-check-circle-fill"></i> Resultado da Simulação
+                        </h4>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        <div class="text-center mb-4 pb-3 border-bottom">
+                            <p class="mb-2"><span class="badge bg-secondary">@Model.OriginCode → @Model.DestinationCode</span></p>
+                            <p class="text-muted mb-0 small">
+                                @Model.TotalMinutes minutos · @Model.PlanName
+                            </p>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <div class="@(hasEconomy ? "result-box-green" : "result-box-gray") p-4 h-100 d-flex flex-column justify-content-center">
+                                    <p class="text-uppercase small mb-3 fw-semibold text-center" style="letter-spacing: 0.5px; color: @(hasEconomy ? "#10b981" : "#6b7280");">
+                                        <i class="bi @(hasEconomy ? "bi-check-circle-fill" : "bi-dash-circle-fill")"></i> Com plano
+                                    </p>
+                                    <h2 class="fw-light mb-0 text-center" style="color: @(hasEconomy ? "#10b981" : "#6b7280"); font-size: 2.5rem;">R$ @Model.PriceWithPlan.Value.ToString("F2")</h2>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="@(hasEconomy ? "result-box-red" : "result-box-gray") p-4 h-100 d-flex flex-column justify-content-center">
+                                    <p class="text-uppercase small mb-3 fw-semibold text-center" style="letter-spacing: 0.5px; color: @(hasEconomy ? "#ef4444" : "#6b7280");">
+                                        <i class="bi @(hasEconomy ? "bi-x-circle-fill" : "bi-dash-circle-fill")"></i> Sem plano
+                                    </p>
+                                    <h2 class="fw-light mb-0 text-center" style="color: @(hasEconomy ? "#ef4444" : "#6b7280"); font-size: 2.5rem;">R$ @Model.PriceWithoutPlan.Value.ToString("F2")</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (hasEconomy)
+                        {
+                            <div class="result-box-orange p-4">
+                                <div class="text-center">
+                                    <p class="text-uppercase small mb-2 fw-semibold" style="letter-spacing: 0.5px; color: #ff6b35;">
+                                        <i class="bi bi-piggy-bank-fill"></i> Economia Total
+                                    </p>
+                                    <h3 class="fw-light mb-1" style="font-size: 3rem; color: #ff6b35;">R$ @savings.ToString("F2")</h3>
+                                    <p class="mb-0" style="color: #ff6b35; font-size: 1.2rem;">@savingsPercentage.ToString("F1")% de desconto</p>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="result-box-gray p-4">
+                                <div class="text-center">
+                                    <p class="text-uppercase small mb-2 fw-semibold" style="letter-spacing: 0.5px; color: #6b7280;">
+                                        <i class="bi bi-dash-circle-fill"></i> Economia Total
+                                    </p>
+                                    <h3 class="fw-light mb-1" style="font-size: 3rem; color: #6b7280;">R$ -</h3>
+                                    <p class="mb-0 small" style="color: #9ca3af;">Não há economia neste cenário</p>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="text-center mt-4 pt-3">
+                            <a asp-action="Index" class="btn btn-outline-primary px-4 py-2 rounded-3 text-uppercase small fw-semibold" style="letter-spacing: 0.5px; border-color: #6366f1; color: #6366f1;">
+                                <i class="bi bi-arrow-clockwise"></i> Nova simulação
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

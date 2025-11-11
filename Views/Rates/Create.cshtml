@@ -1,0 +1,95 @@
+﻿@model Project_Skynetz.Models.Rate
+
+@{
+    ViewData["Title"] = "Nova Tarifa";
+}
+
+<style>
+    .card-custom {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .main-title {
+        color: white;
+        text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    }
+
+    .btn-success-custom {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border: none;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .btn-success-custom:hover {
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        transform: translateY(-2px);
+    }
+
+    .form-control-custom {
+        border: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+    }
+
+    .form-control-custom:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            
+            <div class="text-center mb-5">
+                <h1 class="fw-light mb-3 main-title" style="letter-spacing: 1px;">
+                    <i class="bi bi-plus-circle"></i> Nova Tarifa
+                </h1>
+            </div>
+
+            <div class="card border-0 shadow-lg card-custom">
+                <div class="card-body p-5">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="OriginCode" class="form-label text-uppercase small fw-semibold text-muted mb-2" style="letter-spacing: 0.5px;">DDD Origem</label>
+                            <input asp-for="OriginCode" class="form-control form-control-lg rounded-3 form-control-custom" placeholder="Ex: 011" maxlength="3" />
+                            <span asp-validation-for="OriginCode" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="DestinationCode" class="form-label text-uppercase small fw-semibold text-muted mb-2" style="letter-spacing: 0.5px;">DDD Destino</label>
+                            <input asp-for="DestinationCode" class="form-control form-control-lg rounded-3 form-control-custom" placeholder="Ex: 016" maxlength="3" />
+                            <span asp-validation-for="DestinationCode" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="PricePerMinute" class="form-label text-uppercase small fw-semibold text-muted mb-2" style="letter-spacing: 0.5px;">Preço por Minuto (R$)</label>
+                            <input asp-for="PricePerMinute" type="text" class="form-control form-control-lg rounded-3 form-control-custom" placeholder="Ex: 1,90" data-val="false" />
+                            <small class="text-muted">Use vírgula para decimais (ex: 1,90)</small>
+                            <span asp-validation-for="PricePerMinute" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                        
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="submit" class="btn btn-success-custom text-white px-4 py-2 rounded-3 flex-grow-1">
+                                <i class="bi bi-check-circle"></i> Salvar
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary px-4 py-2 rounded-3">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

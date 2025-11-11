@@ -1,0 +1,123 @@
+﻿html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-custom {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.card-custom:hover {
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+}
+
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.form-control, .form-select {
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.text-primary {
+  color: #6366f1 !important;
+}
+
+.bg-primary {
+  background-color: #6366f1 !important;
+}
+
+.border-primary {
+  border-color: #6366f1 !important;
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+.dropdown-menu {
+  background: rgba(13, 6, 33, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.dropdown-item {
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(99, 102, 241, 0.2);
+  color: white;
+}
+
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table thead th {
+  border: none;
+  padding: 1rem;
+}
+
+.table tbody td {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
+.alert {
+  border-radius: 12px;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}

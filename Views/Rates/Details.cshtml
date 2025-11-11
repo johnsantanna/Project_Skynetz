@@ -1,0 +1,89 @@
+﻿@model Project_Skynetz.Models.Rate
+
+@{
+    ViewData["Title"] = "Detalhes da Tarifa";
+}
+
+<style>
+    .card-custom {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .main-title {
+        color: white;
+        text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .info-box {
+        background: rgba(99, 102, 241, 0.05);
+        border-left: 4px solid #6366f1;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .info-label {
+        color: #6b7280;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
+    }
+
+    .info-value {
+        color: #1f2937;
+        font-size: 1.5rem;
+        font-weight: 300;
+    }
+
+    .price-highlight {
+        color: #10b981;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            
+            <div class="text-center mb-5">
+                <h1 class="fw-light mb-3 main-title" style="letter-spacing: 1px;">
+                    <i class="bi bi-eye"></i> Detalhes da Tarifa
+                </h1>
+            </div>
+
+            <div class="card border-0 shadow-lg card-custom">
+                <div class="card-body p-5">
+                    
+                    <div class="info-box">
+                        <div class="info-label">DDD Origem</div>
+                        <div class="info-value">@Model.OriginCode</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-label">DDD Destino</div>
+                        <div class="info-value">@Model.DestinationCode</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-label">Preço por Minuto</div>
+                        <div class="price-highlight">R$ @Model.PricePerMinute.ToString("F2")</div>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+                        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary px-4 py-2 rounded-3">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary px-4 py-2 rounded-3 flex-grow-1">
+                            <i class="bi bi-arrow-left"></i> Voltar para Lista
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
