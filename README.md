@@ -1,7 +1,8 @@
 ﻿# Project Skynetz - Sistema FaleMais
 
 > Sistema de cálculo de tarifas telefônicas com planos FaleMais  
-> Desenvolvido em **ASP.NET Core MVC (.NET 8)**
+> Desenvolvido em **ASP.NET Core MVC (.NET 8)**  
+> ℹ️ Este README foi formatado com a ajuda do github copilot
 
 ---
 
@@ -125,25 +126,28 @@ Economia: R$ 47,50 (31,3%)
 
 ### Teste 1: Com Economia
 ```diff
-+ Origem: 011 → Destino: 016
-+ Tempo: 80 min | Plano: FaleMais 30
-+ Com Plano: R$ 104,50 | Sem Plano: R$ 152,00
-+ Economia: R$ 47,50 (31,3%)
+Origem: 011 → Destino: 016
+Tempo: 80 min | Plano: FaleMais 30
++ Com Plano: R$ 104,50 
+- Sem Plano: R$ 152,00  
+! Economia: R$ 47,50 (31,3%)
 ```
 
 ### Teste 2: Economia Máxima
 ```diff
-+ Origem: 011 → Destino: 016
-+ Tempo: 20 min | Plano: FaleMais 30
-+ Com Plano: R$ 0,00 | Sem Plano: R$ 38,00
+Origem: 011 → Destino: 016
+Tempo: 20 min | Plano: FaleMais 30
++ Com Plano: R$ 0,00  
+- Sem Plano: R$ 38,00  
 ! Economia: R$ 38,00 (100%)
 ```
 
 ### Teste 3: Tempo Exato
 ```diff
-+ Origem: 011 → Destino: 016
-+ Tempo: 30 min | Plano: FaleMais 30
-+ Com Plano: R$ 0,00 | Sem Plano: R$ 57,00
+Origem: 011 → Destino: 016
+Tempo: 30 min | Plano: FaleMais 30
++ Com Plano: R$ 0,00  
+- Sem Plano: R$ 57,00  
 ! Economia: 100%
 ```
 
